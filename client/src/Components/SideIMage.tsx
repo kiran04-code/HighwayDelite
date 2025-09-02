@@ -2,7 +2,7 @@
 
 const SideIMage = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="w-full  md:flex hidden h-full flex items-center justify-center">
       <img
         src="right-column.png"
         alt="right-column"

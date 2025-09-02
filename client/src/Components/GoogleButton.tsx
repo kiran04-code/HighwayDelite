@@ -32,7 +32,7 @@ const GoogleButton = () => {
   };
 
   return (
-    <div>
+    <div className="bg-blue-500 p-2 rounded-[10px]">
       <GoogleLogin
         onSuccess={(response) => handleLogin(response.credential)}
         onError={() => console.log("Google login error")}
