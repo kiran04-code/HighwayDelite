@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser())
 app.use(Auth("UserToken"))
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin:[ "http://localhost:5173 ",'https://highwaydelite-1-xdcl.onrender.com'],
     credentials: true, // if you're sending cookies or auth headers
 }));
 // Mongose Coonection
