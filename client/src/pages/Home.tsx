@@ -1,8 +1,11 @@
 import React from 'react';
 import Notes from '../Components/Notes/Notes';
 import { Link } from 'react-router-dom';
+import  { useAuth } from '../context/AuthContext';
 
 const Home = () => {
+    const {User}  = useAuth()
+    console.log(User)
     return (
         <div className="p-4 md:p-8 bg-gray-100 min-h-screen">
 

@@ -4,14 +4,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import Small from './Loader/small'
 import toast from 'react-hot-toast'
+import { useAuth } from '../context/AuthContext'
 const From = () => {
-
-
+  // context Data //
+  const { axiosInstance } = useAuth()
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const [showOtpInput, setshowOtpInput] = useState<boolean>(true)
   const [error, setError] = useState<string>("");
   const navigate = useNavigate()
-  const [otp, setOtp] = useState<number | "">("")
+  const [otp, setOtp] = useState<number>()
   const [isPending, setIsPending] = useTransition()
   const [from, setfrom] = useState({
     name: "",
@@ -29,7 +30,16 @@ const From = () => {
       return toast.error("Please Enter OTP")
     }
     console.log("OTP", otp)
-    navigate("/")
+    setIsPending(async()=>{
+      const {data} = await axiosInstance.post("/VerifiedOtp",{otp,from})
+      console.log(data)
+      if(data.success){
+        toast.success(data.message)
+        navigate("/")
+      }else{
+        toast.error(data.message)
+      }
+    })
   }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -55,18 +65,24 @@ const From = () => {
     }
   };
 
-  const HandleSubmitFrom = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const HandleSubmitFrom = async (e: React.FormEvent<HTMLFormElement>) => {
+     e.preventDefault()
     if (!from.DateOfBirth || !from.email || !from.name) {
       return toast.error("Please Fill All Details!")
     }
-    if(error){
-       return toast.error("Enter Valid Date of Birth")
+    if (error) {
+      return toast.error("Enter Valid Date of Birth")
     }
-    setIsPending(() => {
-      toast.success("Otp send SuccessFull")
-      setOtp("")
-      setshowOtpInput(false)
+    setIsPending(async () => {
+      const { data } = await axiosInstance.post("/Signup", from)
+      console.log(data)
+      if (data.success) {
+        toast.success(data.message)
+        setshowOtpInput(false)
+      }
+      else {
+     toast.error(data.message)
+      }
     });
   }
   return (
@@ -94,8 +110,6 @@ const From = () => {
           name='email'
           placeholder="Enter Your  Email "
           onChange={handleChange}
-
-
           className="p-3 border border-gray-300 rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-[#6210a5]"
         />
         {

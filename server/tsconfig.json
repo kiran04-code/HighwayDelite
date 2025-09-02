@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",           // modern JS
+    "module": "CommonJS",         // simplest for Node + ts-node
+    "rootDir": "./",              // where your TS files are
+    "outDir": "./dist",           // compiled JS output
+    "strict": true,               // strict type checking
+    "esModuleInterop": true,      // allow import express from "express"
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
