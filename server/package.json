@@ -5,7 +5,7 @@
   "module": "CommonJS",
   "scripts": {
     "dev": "nodemon --watch \"**/*.ts\" --exec ts-node server.ts",
-    "start": " tsc --watch \"**/*.ts\" --exec ts-node server.ts"
+    "start": "ts-node-dev --respawn --transpile-only server.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "@types/nodemailer": "^7.0.1",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.2"
   },
   "dependencies": {
