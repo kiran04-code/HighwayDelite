@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Navbar from '../Components/Navbar'
 import SideIMage from '../Components/SideIMage'
 import From from '../Components/SignupFrom'

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import Notes from '../Components/Notes/Notes';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/contextAuth';

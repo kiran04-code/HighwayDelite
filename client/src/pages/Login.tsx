@@ -1,4 +1,3 @@
-import React from 'react'
 import Navbar from '../Components/Navbar'
 import SideIMage from '../Components/SideIMage'
 import LoginFrom from '../Components/LoginFrom'
