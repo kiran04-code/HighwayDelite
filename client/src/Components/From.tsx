@@ -6,6 +6,8 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa'
 const From = () => {
     const [showPassword,setShowPassword]  = useState(false)
   return (
+    console.log("test"); // in a React component
+
     <div>
         <form className="bg-white rounded-xl shadow-lg p-6 md:w-90  gap-4 flex flex-col">
             <h1 className='font-bold  text-2xl'>SignUp</h1>
