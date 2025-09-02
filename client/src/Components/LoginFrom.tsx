@@ -19,7 +19,7 @@ const LoginForm = () => {
     const { name, value } = e.target;
     if (name === 'email') setEmail(value);
     if (name === 'Otp') {
-      if (/^\d*$/.test(value) && value.length <= 6) setOtp(value); // only digits max 6
+      if (/^\d*$/.test(value) && value.length <= 6) setOtp(value); 
     }
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -27,7 +27,6 @@ const LoginForm = () => {
      startTransition(async()=>{
       const {data} = await axiosInstance.post("/login",{email})
       if(data.success){
-        console.log(data)
         toast.success(data.message)
         setShowOtpInput(false)
       }else{
@@ -37,7 +36,6 @@ const LoginForm = () => {
   };
   const hnadleOtp = (e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
-   console.log('otp',otp)
    startTransition(async()=>{
     const {data}  = await axiosInstance.post("/LoginOtp",{email,otp})
     if(data.success){

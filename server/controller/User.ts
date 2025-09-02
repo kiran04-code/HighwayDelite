@@ -159,3 +159,49 @@ export const LoginOtp = async (req: Request, res: Response) => {
 
     }
 }
+
+
+// google Auth 
+
+export const GoogleAuth = async (req: Request, res: Response) => {
+    try {
+        const { googleData } = req.body
+
+        const email = googleData.email
+
+        const finUser = await Users.findOne({ email })
+
+        if (finUser) {
+            const token = CerateToken(finUser)
+            res.cookie("UserToken", token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none"
+            }).json({
+                success: true,
+                message: "Login Successfully"
+            })
+        }
+        else {
+            const createAcount = await Users.create({
+                name: googleData.name,
+                email: googleData.email
+            })
+            const token = CerateToken(createAcount)
+            res.cookie("UserToken", token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none"
+            }).json({
+                success: true,
+                message: "Login Successfully"
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        res.json({
+            success: false,
+            message: "Server Error"
+        })
+    }
+}

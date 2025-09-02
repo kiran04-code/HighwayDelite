@@ -11,7 +11,12 @@ function App() {
 
   return (
    <div className=' h-screen w-full'>
-    <Toaster position='top-right'/>
+    <Toaster position='top-right' toastOptions={{
+    style: {
+      backgroundColor: "#3B82F6", 
+      color: "#FFFF", 
+    },
+  }} />
   <Routes>
     
     <Route path='/' element={<Home/>}/>

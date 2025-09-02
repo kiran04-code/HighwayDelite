@@ -9,6 +9,9 @@ export interface AuthContextType {
   axiosInstance: AxiosInstance;
   User: IUser | null
   setUser: React.Dispatch<React.SetStateAction<IUser | null>>
+  loading:boolean
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);

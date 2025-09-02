@@ -25,39 +25,34 @@ export const CreateNotes = async (req: Request, res: Response): Promise<void> =>
 }
 export const finAllNotes = async (req: Request, res: Response): Promise<void> => {
     try {
-        const users = (req as any).user
-        if(!!users.id){
-            const data = await Notes.find({ cerateUser: users.id }).populate("cerateUser")
+        const user = (req as any).user;
 
-        res.json({
-            success: true,
-            message: "Notes Created",
-            NotesData: data
-        })
-        if (!users) {
-            res.json({
+        if (!user || !user.id) {
+            res.status(401).json({
                 success: false,
-                message: "User Not Autherised"
-            })
-        }
-        }else{
-            return 
+                message: "User not authorized",
+            });
+            return;
         }
 
+        const data = await Notes.find({ cerateUser: user.id }).populate("cerateUser");
+
+        res.status(200).json({
+            success: true,
+            message: "Notes fetched successfully",
+            NotesData: data,
+        });
     } catch (error) {
-        console.log(error)
-        res.json({
-            suceess: false,
-            message: "Notes Created"
-        })
-
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: "Error fetching notes",
+        });
     }
-}
-
-
+};
 export const Hnadledelted = async (req: Request, res: Response) => {
     try {
-        const {id} = req.body;
+        const { id } = req.body;
         await Notes.findByIdAndDelete(id)
         return res.json({
             success: true,

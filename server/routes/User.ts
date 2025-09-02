@@ -1,5 +1,5 @@
 import express from "express";
-import { Auth, login, LoginOtp, Logout, SignUp, VerifiedOtp } from "../controller/User";
+import { Auth, GoogleAuth, login, LoginOtp, Logout, SignUp, VerifiedOtp } from "../controller/User";
 import { CreateNotes, finAllNotes, Hnadledelted } from "../controller/Notes";
 
 const  UserRoutes = express.Router()
@@ -12,4 +12,5 @@ UserRoutes.post("/LoginOtp",LoginOtp)
 UserRoutes.post("/create",CreateNotes)
 UserRoutes.get("/finAllNotes",finAllNotes)
 UserRoutes.post("/Hnadledelted",Hnadledelted)
+UserRoutes.post("/GoogleAuth",GoogleAuth)
 export default UserRoutes

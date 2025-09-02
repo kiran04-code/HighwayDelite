@@ -20,13 +20,13 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   const [count, setCount] = useState<number | null>(null);
  const [User, setUser] = useState<IUser | null>(null);
+ const [loading, setLoading] = useState(true);
   const UserAuth = async (): Promise<void> => {
     try {
       const { data } = await axiosInstance.get("/auth");
       setUser(data?.UserData);
     } catch (error) {
       console.error("Auth error:", error);
-      setUser(null);
     }
   };
 
@@ -42,6 +42,8 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         axiosInstance,
         setUser,
         User,
+        setLoading,
+        loading
       }}
     >
       {children}

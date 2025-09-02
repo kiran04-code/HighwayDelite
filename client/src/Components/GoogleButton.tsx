@@ -1,16 +1,43 @@
+import { GoogleLogin } from "@react-oauth/google";
+import {jwtDecode} from "jwt-decode";
+import { useAuth } from "../context/contextAuth";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const GoogleButton = () => {
+  const { axiosInstance } = useAuth();
+  const navigate = useNavigate();
+
+  // Function to handle login and send data to backend
+  const handleLogin = async (credential: string | undefined | null) => {
+    if (!credential) return;
+
+    const decoded: unknown = jwtDecode(credential);
+    console.log("Decoded Google Data:", decoded);
+
+    try {
+  
+      const { data } = await axiosInstance.post("/GoogleAuth", { googleData: decoded });
+
+      if (data.success) {
+        toast.success(data.message);
+        navigate("/"); 
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("Something went wrong during login");
+    }
+  };
+
   return (
-    <button
-      className="flex items-center   rounded-2xl justify-center gap-2 w-full px-4 py-2 border border-gray-300  shadow-sm bg-white hover:bg-gray-100 transition font-medium text-gray-700"
-    >
-      <img
-        src="https://www.svgrepo.com/show/355037/google.svg"
-        alt="Google Logo"
-        className="w-5 h-5"
+    <div>
+      <GoogleLogin
+        onSuccess={(response) => handleLogin(response.credential)}
+        onError={() => console.log("Google login error")}
       />
-      Continue with Google
-    </button>
+    </div>
   );
 };
 
