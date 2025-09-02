@@ -1,4 +1,4 @@
-import express ,{ Request,Response}  from "express";
+import express, { Request, Response } from "express";
 import dotenv from "dotenv"
 import cors from "cors"
 import DBConnection from "./config/monoose";
@@ -15,10 +15,16 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 app.use(cookieParser())
 app.use(Auth("UserToken"))
-app.use(cors({
-    origin:[ "http://localhost:5173 ",'https://highwaydelite-1-xdcl.onrender.com'],
-    credentials: true, // if you're sending cookies or auth headers
-}));
+app.use(
+    cors({
+        origin: [
+            "http://localhost:5173", 
+            "https://highwaydelite-1-xdcl.onrender.com"
+        ],
+        credentials: true, 
+    })
+);
+
 // Mongose Coonection
 DBConnection(process.env.MONGODB_URI).then(() => {
     console.log("MONGODB IS Connected")
@@ -30,8 +36,8 @@ app.get("/", (req, res) => {
     res.send("Hello from Node + TypeScript!");
 });
 app.get("/auth", (req: Request, res: Response) => {
-  const user = (req as any).user;
-  res.json({ user });
+    const user = (req as any).user;
+    res.json({ user });
 });
 
 app.use("/api", UserRoutes)
