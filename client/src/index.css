@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Great+Vibes&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Manrope:wght@200..800&family=Mozilla+Headline:wght@200..700&family=Noto+Sans+JP:wght@100..900&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sevillana&family=TASA+Orbiter:wght@400..800&display=swap');
+@import "tailwindcss";
+
+*{
+  font-family: "TASA Orbiter", sans-serif;
+}
