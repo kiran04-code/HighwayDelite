@@ -3,21 +3,17 @@ import { ValidUser } from "../auth/UserAuth";
 
 export const Auth = (cookieName: string) => {
   return (req: Request, res: Response, next: NextFunction) => {
-    const token = req.cookies?.[cookieName];
-    console.log("Token:", token);
-
+    const token = req.cookies[cookieName]
     if (!token) {
       (req as any).user = null;
       return next();
     }
-
     try {
-      const payload = ValidUser(token); 
-      (req as any).user = payload; 
+      const payload = ValidUser(token);
+      (req as any).user = payload;
     } catch (error) {
-      (req as any).user = null; 
+      (req as any).user = null;
     }
-
     next();
   };
 };

@@ -1,8 +1,10 @@
 import React, { useState, useTransition } from 'react';
 import GoogleButton from './GoogleButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import Small from './Loader/small';
+import { useAuth } from '../context/contextAuth';
+import toast from 'react-hot-toast';
 
 const LoginForm = () => {
 
@@ -11,7 +13,8 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showOtpInput, setShowOtpInput] = useState<boolean>(true);
   const [isPending, startTransition] = useTransition();
-
+  const {axiosInstance} = useAuth()
+  const  navigete = useNavigate()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (name === 'email') setEmail(value);
@@ -19,32 +22,38 @@ const LoginForm = () => {
       if (/^\d*$/.test(value) && value.length <= 6) setOtp(value); // only digits max 6
     }
   };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    startTransition(() => {
-      if (showOtpInput) {
-
-        console.log('Sending OTP to:', email);
-        setTimeout(() => {
-          setShowOtpInput(false); 
-        }, 1000);
-      } else {
-
-        console.log('Verifying OTP:', otp, 'for email:', email);
-        setTimeout(() => {
-          alert('Login/Signup successful!');
-        }, 1000);
+     startTransition(async()=>{
+      const {data} = await axiosInstance.post("/login",{email})
+      if(data.success){
+        console.log(data)
+        toast.success(data.message)
+        setShowOtpInput(false)
+      }else{
+        toast.error(data.message)
       }
-    });
+     })
   };
-
+  const hnadleOtp = (e:React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault()
+   console.log('otp',otp)
+   startTransition(async()=>{
+    const {data}  = await axiosInstance.post("/LoginOtp",{email,otp})
+    if(data.success){
+      toast.success(data.message)
+      navigete("/")
+    }
+    else{
+       toast.error(data.message)
+    }
+   })
+  }
   return (
     <div className="">
       <form
         className="bg-white rounded-[5px] shadow-lg p-6 px-10 gap-4 flex w-full flex-col"
-        onSubmit={handleSubmit}
+        onSubmit={   showOtpInput  ? handleSubmit:hnadleOtp}
       >
         <h1 className="text-2xl md:text-3xl font-bold text-center">Sign in</h1>
         <p className="text-gray-600 text-center">

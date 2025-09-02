@@ -1,14 +1,14 @@
 import { createContext, useContext } from "react";
 import type { AxiosInstance } from "axios";
 
-import type { IUser } from "./AuthContext";
+import type { IUser } from "./AuthContextProvider"
 
 export interface AuthContextType {
   count: number | null;
   setCount: React.Dispatch<React.SetStateAction<number | null>>;
   axiosInstance: AxiosInstance;
-   User:IUser | null
-  setUser:React.Dispatch<React.SetStateAction<IUser | null>>
+  User: IUser | null
+  setUser: React.Dispatch<React.SetStateAction<IUser | null>>
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);

@@ -4,7 +4,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import Small from './Loader/small'
 import toast from 'react-hot-toast'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../context/contextAuth'
+
+
+
 const From = () => {
   // context Data //
   const { axiosInstance } = useAuth()
@@ -32,7 +35,6 @@ const From = () => {
     console.log("OTP", otp)
     setIsPending(async()=>{
       const {data} = await axiosInstance.post("/VerifiedOtp",{otp,from})
-      console.log(data)
       if(data.success){
         toast.success(data.message)
         navigate("/")
@@ -75,7 +77,6 @@ const From = () => {
     }
     setIsPending(async () => {
       const { data } = await axiosInstance.post("/Signup", from)
-      console.log(data)
       if (data.success) {
         toast.success(data.message)
         setshowOtpInput(false)
