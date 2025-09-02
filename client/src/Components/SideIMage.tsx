@@ -1,15 +1,15 @@
-import React from 'react'
+import React from 'react';
 
 const SideIMage = () => {
   return (
-    <div className="hidden md:flex w-full items-center justify-center mb-5 md:overflow-hidden">
-      <img 
-        src="right-column.png" 
-        alt="right-column"  
-        className="w-full md:h-[42vw] object-cover rounded-5xl  "
+    <div className="w-full h-full flex items-center justify-center">
+      <img
+        src="right-column.png"
+        alt="right-column"
+        className="object-cover w-full h-full rounded-xl"
       />
     </div>
-  )
-}
+  );
+};
 
-export default SideIMage
+export default SideIMage;

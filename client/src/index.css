@@ -2,5 +2,8 @@
 @import "tailwindcss";
 
 *{
-  font-family: "TASA Orbiter", sans-serif;
+  font-family: "TASA Orbiter", sans-serif;  
+}
+body{
+  background-color: rgb(222, 241, 245);
 }
