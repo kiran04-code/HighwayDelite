@@ -6,7 +6,6 @@ import toast from 'react-hot-toast';
 
 const Home = () => {
   const { User, axiosInstance,loading,setLoading,setUser } = useAuth();
-  console.log(User)
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -28,12 +27,12 @@ const Home = () => {
     if (!User && !loading) {
       navigate("/signin");
     }
-  }, [User, navigate,logout]);
-    return (
+  }, [User,logout,loading]);
+    return User&&(
         <div className="p-4 md:p-8 bg-gray-100 min-h-screen">
            
             {
-                loading ? <div> <div className="flex items-center gap-3 mb-6   w-full justify-between p-2">
+                User ? <div> <div className="flex items-center gap-3 mb-6   w-full justify-between p-2">
                 <div className='flex gap-2 justify-center items-center'>
                     <img src="/icon.png" alt="Dashboard Icon" className="w-8 h-8 md:w-10 md:h-10" />
                     <h1 className="text-xl md:text-2xl font-bold">Dashboard</h1>

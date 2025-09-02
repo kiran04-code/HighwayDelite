@@ -1,15 +1,15 @@
 
 
-const SideIMage = () => {
+const SideImage = () => {
   return (
-    <div className="w-full  md:flex hidden h-full flex items-center justify-center">
+    <div className="">
       <img
         src="right-column.png"
         alt="right-column"
-        className="object-cover w-full h-full rounded-xl"
+        className="w-full max-w-md   h-auto rounded-xl object-contain"
       />
     </div>
   );
 };
 
-export default SideIMage;
+export default SideImage;

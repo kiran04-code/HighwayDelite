@@ -1,26 +1,20 @@
+
 import Navbar from '../Components/Navbar';
 import SideIMage from '../Components/SideIMage';
 import From from '../Components/SignupFrom';
 
 const SignUp = () => {
   return (
-    <div className="flex flex-col md:flex-row min-h-screen w-full">
+     <div className=" w-full h-screen md:flex md:justify-between md:px-30 md:py-10 p-3 md:items-center  flex justify-center items-center">
 
-      <div className="w-full md:w-full">
-        <Navbar />
+      <div className='md:flex   py-10 md:justify-between gap-5'>
+        <div className='mb-5  h-full md:absolute top-10 left-0  '><Navbar/></div>
+        <div><From /></div>
       </div>
-
-
-      <div className="flex-1 flex justify-center items-center px-6 md:px-20 py-10">
-        <div className="w-full max-w-md">
-          <From />
-        </div>
-      </div>
-
-
-      <div className="hidden md:flex flex-[1.5] justify-center items-center bg-gray-100">
+      <div className='hidden md:flex'>
         <SideIMage />
       </div>
+
     </div>
   );
 };
