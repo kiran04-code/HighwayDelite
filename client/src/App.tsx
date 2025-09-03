@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import SignUp from './pages/SignUp'
 import Login from './pages/Login'
 import Home from './pages/Home'
+import BigLoder from "./Components/Loader/BigLoder"
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
     <Route path='/' element={<Home/>}/>
     <Route path='/Signup' element={<SignUp/>}/>
     <Route path='/signin' element={<Login/>}/>
+    <Route path='/Loder' element={<BigLoder/>}/>
   </Routes>
 </div>
 

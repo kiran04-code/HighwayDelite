@@ -24,7 +24,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const UserAuth = async (): Promise<void> => {
     try {
       const { data } = await axiosInstance.get("/auth");
-      setUser(data?.UserData);
+      setUser(data.UserData);
     } catch (error) {
       console.error("Auth error:", error);
     }
@@ -32,7 +32,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     UserAuth();
-  }, [User]);
+  });
 
   return (
     <AuthContext.Provider

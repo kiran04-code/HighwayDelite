@@ -40,7 +40,7 @@ const LoginForm = () => {
     const {data}  = await axiosInstance.post("/LoginOtp",{email,otp})
     if(data.success){
       toast.success(data.message)
-      navigete("/")
+      navigete("/Loder")
     }
     else{
        toast.error(data.message)
