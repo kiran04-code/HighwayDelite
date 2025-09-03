@@ -1,5 +1,5 @@
 import { GoogleLogin } from "@react-oauth/google";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { useAuth } from "../context/contextAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -13,15 +13,12 @@ const GoogleButton = () => {
     if (!credential) return;
 
     const decoded: unknown = jwtDecode(credential);
-    console.log("Decoded Google Data:", decoded);
 
     try {
-  
       const { data } = await axiosInstance.post("/GoogleAuth", { googleData: decoded });
-
       if (data.success) {
         toast.success(data.message);
-        navigate("/"); 
+        navigate("/");
       } else {
         toast.error(data.message);
       }
