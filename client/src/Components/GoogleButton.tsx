@@ -21,7 +21,7 @@ const GoogleButton = () => {
 
       if (data.success) {
         toast.success(data.message);
-        navigate("/Loder"); 
+        navigate("/"); 
       } else {
         toast.error(data.message);
       }

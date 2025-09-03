@@ -5,7 +5,7 @@ import { useAuth } from '../context/contextAuth';
 import toast from 'react-hot-toast';
 
 const Home = () => {
-  const { User, axiosInstance, loading, setLoading, setUser } = useAuth();
+  const { User, axiosInstance, setLoading, setUser } = useAuth();
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -25,10 +25,10 @@ const Home = () => {
 }
   };
   useEffect(() => {
-    if (!User && !loading) {
+    if (User===null) {
       navigate("/signin");
     }
-  }, [User, loading]);
+  }, [User]);
   return (
     <div className="p-4 md:p-8 bg-gray-100 min-h-screen">
       
