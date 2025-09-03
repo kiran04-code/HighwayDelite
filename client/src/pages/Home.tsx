@@ -24,11 +24,22 @@ const Home = () => {
       toast.error("Logout failed");
     }
   };
+  const UserAuth = async () => {
+    try {
+      const { data } = await axiosInstance.get("/auth");
+      setUser(data.UserData);
+
+    } catch (error) {
+      console.error("Auth error:", error);
+    }
+  };
+
   useEffect(() => {
     if (!User) {
       navigate("/signin");
     }
-  }, [User, navigate]);
+    UserAuth();
+  }, );
   return (
     <div className="p-4 md:p-8 bg-gray-100 min-h-screen">
 

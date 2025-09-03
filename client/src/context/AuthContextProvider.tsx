@@ -21,7 +21,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [count, setCount] = useState<number | null>(null);
  const [User, setUser] = useState<IUser | null>(null);
  const [loading, setLoading] = useState(true);
-  const UserAuth = async (): Promise<void> => {
+  const UserAuth = async () => {
     try {
       const { data } = await axiosInstance.get("/auth");
       setUser(data.UserData);
